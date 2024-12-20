@@ -1,9 +1,11 @@
-import express, { Request, Response } from 'express'
+import express, { NextFunction, Request, Response } from 'express'
 import userRouter from './modules/users/user.router'
+import tourRouter from './modules/tour/tour.router'
 const app = express()
 //middleware
 app.use(express.json())
 app.use('/api/user', userRouter)
+app.use('/api/tour', tourRouter)
 
 app.get('/', (req: Request, res: Response) => {
   try {
@@ -14,5 +16,14 @@ app.get('/', (req: Request, res: Response) => {
   } catch (error) {
     console.log(error)
   }
+})
+
+app.use((err: any, req: Request, res: Response,next:NextFunction) => {
+ res.status(500).json({
+  sucess:false,
+  message:err.message,
+  error:err
+ })
+ next()
 })
 export default app

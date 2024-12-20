@@ -7,8 +7,8 @@ import { userServices } from './user.services'
 const createUser = async (req: Request, res: Response) => {
   try {
     const payLoad = req.body
-    console.log(payLoad);
-    
+    console.log(payLoad)
+
     const result = await userServices.createUser(payLoad)
     res.status(200).json({
       sucess: true,
