@@ -1,6 +1,7 @@
 import express, { NextFunction, Request, Response } from 'express'
 import userRouter from './modules/users/user.router'
 import tourRouter from './modules/tour/tour.router'
+import { StatusCodes } from 'http-status-codes'
 const app = express()
 //middleware
 app.use(express.json())
@@ -19,7 +20,7 @@ app.get('/', (req: Request, res: Response) => {
 })
 
 app.use((err: any, req: Request, res: Response,next:NextFunction) => {
- res.status(500).json({
+ res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
   sucess:false,
   message:err.message,
   error:err
