@@ -4,6 +4,7 @@ import { handleGenericError } from '../helpers/handleGenerricError'
 import { handleDuplicateError } from '../helpers/handleDuplicateError'
 import { handleCastError } from '../helpers/handleCustError'
 import { handleValidationError } from '../helpers/handleValidationError'
+import { handleZodError } from '../helpers/handleZodError'
 
 //Generic Error
 //Duplicate Error
@@ -23,7 +24,9 @@ export const globalErrorHandelar = (
   next: NextFunction
 ) => {
   //cast error
-  if (err instanceof mongoose.Error.CastError) {
+  if (err.name && err.name === 'zodError') {
+    handleZodError(err, res)
+  } else if (err instanceof mongoose.Error.CastError) {
     handleCastError(err, res)
   }
 
