@@ -18,6 +18,10 @@ const tourSchema = new Schema<ITour, TTourModel, ITourMethods>({
     type: Number,
     required: true,
   },
+  avaliableSeats: {
+    type: Number,
+    required: true,
+  },
   coverImage: {
     type: String,
     required: true,
@@ -56,11 +60,9 @@ tourSchema.static(
   'getNextNearestStartDateAndEndDate',
   function getNextNearestStartDateAndEndDate() {
     const today = new Date()
-    console.log(this.startDates);
-    
+    console.log(this.startDates)
+
     const futureDates = this.startDates.filter((startDate: Date) => {
-     
-      
       return startDate > today
     })
 
