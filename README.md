@@ -30,3 +30,8 @@ review{
     tour->ref
     user -> ref
 }
+
+
+# issue
+- transition and roll back e jkn kono error pai tkn booking tikh e create hoi na but update ta hoyea jai 
+- static method issue 

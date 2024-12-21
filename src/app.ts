@@ -21,12 +21,5 @@ app.get('/', (req: Request, res: Response) => {
   }
 })
 
-app.use((err: any, req: Request, res: Response, next: NextFunction) => {
-  res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-    sucess: false,
-    message: err.message,
-    error: err,
-  })
-  next()
-})
+
 export default app
