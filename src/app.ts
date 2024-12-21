@@ -1,8 +1,8 @@
-import express, { NextFunction, Request, Response } from 'express'
+import express, { Request, Response } from 'express'
 import userRouter from './modules/users/user.router'
 import tourRouter from './modules/tour/tour.router'
-import { StatusCodes } from 'http-status-codes'
 import bookingRouter from './modules/booking/booking.route'
+import { globalErrorHandelar } from './middlewares/globalErrorHandelar'
 const app = express()
 //middleware
 app.use(express.json())
@@ -21,5 +21,11 @@ app.get('/', (req: Request, res: Response) => {
   }
 })
 
-
+app.use(globalErrorHandelar)
+app.use('*', (req: Request, res: Response) => {
+  res.status(404).json({
+    status: false,
+    message: 'Route not found',
+  })
+})
 export default app

@@ -24,8 +24,8 @@ const createBooking = async (payload: IBooking): Promise<IBooking> => {
     if (requiredTour.avaliableSeats < bookingSlots) {
       throw new Error('Seats not available')
     }
-    const booking = await bookingModel.create([payload],{session:session})
-   
+    const booking = await bookingModel.create([payload], { session: session })
+
     // avaliable seat tkhe book slot ta minue korte hobe
 
     const updatedTour = await Tour.findByIdAndUpdate(

@@ -29,7 +29,7 @@ const deleteTour = async (id: string) => {
 const getNextSchedule = async (id: string) => {
   console.log(id, 'services')
 
-  const tour = await Tour.getNextNearestStartDateAndEndDate()
+  const tour = await Tour?.getNextNearestStartDateAndEndDate(id)
   // const nextSchedule= tour?.getNextNearestStartDateAndEndDate()
   return {
     tour,
