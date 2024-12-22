@@ -6,8 +6,36 @@ const createTour = async (payload: ITour) => {
   return result
 }
 
-const getTour = async () => {
-  const result = await Tour.find()
+const getTour = async (payload:Record<string, unknown>) => {
+  console.log(payload,"payload main");
+
+
+  const quearyObj = {...payload}
+ 
+  const excludeFields = ['serchTerm']
+  excludeFields.forEach((field)=>{
+    delete quearyObj[field]
+  })
+  console.log(quearyObj,"quearyObj");
+  const searchTerm = payload?.searchTerm   || '';
+
+  const searchAbleFields = ['name','startLocation','locations'];
+  // const result = await Tour.find({$or:[
+  //   {name:{$regex:searchTerm,$options:"i"}},
+  //   {startLocation:{$regex:searchTerm,$options:"i"}},
+  //   {locations:{$regex:searchTerm,$options:"i"}}
+
+  // ]})
+
+  const searchQueary = Tour.find({
+    $or: searchAbleFields.map((field)=>{
+      return {
+        [field]:{$regex:searchTerm,$options:"i"}
+      }
+    })
+  })
+
+  const result = await searchQueary.find(quearyObj)
   return result
 }
 
