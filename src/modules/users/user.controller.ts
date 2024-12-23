@@ -8,7 +8,6 @@ import { StatusCodes } from 'http-status-codes'
 const createUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const payLoad = req.body
- 
 
     const result = await userServices.createUser(payLoad)
     sendResponse(res, {
@@ -24,7 +23,6 @@ const createUser = async (req: Request, res: Response, next: NextFunction) => {
 //get user
 const getUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    
     const result = await userServices.getUser()
     sendResponse(res, {
       statusCode: StatusCodes.OK,
