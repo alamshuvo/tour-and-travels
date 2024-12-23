@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-this-alias */
 import { model, Schema } from 'mongoose'
 import IUser from './user.interface'
-
+import bcrypt from 'bcrypt'
+import config from '../../config'
 const userSchema = new Schema<IUser>({
   name: {
     type: String,
@@ -10,7 +12,6 @@ const userSchema = new Schema<IUser>({
   },
   age: {
     type: Number,
-    required: true,
   },
   email: {
     type: String,
@@ -23,6 +24,11 @@ const userSchema = new Schema<IUser>({
     //     },
     //     message:"{VALUE} is not a valid email"
     // }
+  },
+  password: {
+    type: String,
+    required: [true, 'please provide your password'],
+    select: false,
   },
   photo: {
     type: String,
@@ -61,6 +67,20 @@ const userSchema = new Schema<IUser>({
 // next();
 
 // })
+
+userSchema.pre('save', async function (next) {
+  const user = this
+  user.password = await bcrypt.hash(
+    user?.password,
+    Number(config.bcrypt_salt_round)
+  )
+  next()
+})
+
+userSchema.post('save', async function (doc, next) {
+  doc.password = ''
+  next()
+})
 
 const User = model<IUser>('User', userSchema)
 export default User

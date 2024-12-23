@@ -83,5 +83,8 @@ tourSchema.static(
     return { nearestStartDate, estimatedEndDate }
   }
 )
+
+//pree hook
+
 const Tour = model<ITour, TTourModel>('Tour', tourSchema)
 export default Tour

@@ -62,8 +62,12 @@ const getTour = async (payload: Record<string, unknown>) => {
   // }
   // const result = await sortQury.select(fields)
 
-
-  const tours = new QueryBuilder(Tour.find(), payload).search(['name', 'startLocation', 'locations']).filter().paginate().sort().select()
+  const tours = new QueryBuilder(Tour.find(), payload)
+    .search(['name', 'startLocation', 'locations'])
+    .filter()
+    .paginate()
+    .sort()
+    .select()
   const result = await tours.modelQuery
   return result
 }

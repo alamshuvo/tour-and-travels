@@ -12,12 +12,16 @@ const userValidationSchema = z.object({
       required_error: 'age must be provided and must be a number',
     })
     .int()
-    .positive(),
+    .positive()
+    .optional(),
   email: z
     .string({
       required_error: 'email must be provided and must be a string',
     })
     .email(),
+  password: z.string({
+    required_error: 'password must be provided and must be a string',
+  }),
   photo: z.string().optional(),
 })
 

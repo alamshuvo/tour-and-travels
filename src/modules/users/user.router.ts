@@ -20,6 +20,9 @@ userRouter.post(
 userRouter.get('/:userId', userController.getSingleUser)
 userRouter.put('/:userId', userController.getUpdateUser)
 userRouter.delete('/:userId', userController.deleteUser)
+
+
+
 userRouter.get('/', userController.getUser)
 
 export default userRouter

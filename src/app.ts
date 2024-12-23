@@ -3,9 +3,11 @@ import userRouter from './modules/users/user.router'
 import tourRouter from './modules/tour/tour.router'
 import bookingRouter from './modules/booking/booking.route'
 import { globalErrorHandelar } from './middlewares/globalErrorHandelar'
+import authRouter from './modules/auth/auth.route'
 const app = express()
 //middleware
 app.use(express.json())
+app.use('/api/auth', authRouter)
 app.use('/api/user', userRouter)
 app.use('/api/tour', tourRouter)
 app.use('/api/booking', bookingRouter)

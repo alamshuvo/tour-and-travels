@@ -43,28 +43,26 @@ class QueryBuilder<T> {
     return this
   }
 
-  sort(){
-    
-
+  sort() {
     let sortStr = '-price'
-  if (this.query?.sortby && this.query?.sortOrder) {
-    const sortby = this?.query.sortby
-    const sortOrder = this?.query.sortOrder
-    // "-price" || "price"
-    sortStr = `${sortOrder === 'desc' ? '-' : ''}${sortby}`
+    if (this.query?.sortby && this.query?.sortOrder) {
+      const sortby = this?.query.sortby
+      const sortOrder = this?.query.sortOrder
+      // "-price" || "price"
+      sortStr = `${sortOrder === 'desc' ? '-' : ''}${sortby}`
+    }
+    this.modelQuery = this.modelQuery.sort(sortStr)
+    return this
   }
-  this.modelQuery = this.modelQuery.sort(sortStr)
-  return this
-  }
-  
-  select(){
+
+  select() {
     let fields = '-__v'
-    if ( this.query?.fields) {
+    if (this.query?.fields) {
       fields = (this.query?.fields as string)?.split(',').join(' ')
     }
     this.modelQuery = this.modelQuery.select(fields)
-    return this 
+    return this
   }
 }
 
-export default QueryBuilder;
+export default QueryBuilder
