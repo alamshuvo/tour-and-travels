@@ -16,6 +16,8 @@ type TErrorResponse = {
   success: boolean
   message: string
   error: any
+  name?: string
+  code?: number
 }
 export const globalErrorHandelar = (
   err: TErrorResponse,

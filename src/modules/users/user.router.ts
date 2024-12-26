@@ -1,11 +1,12 @@
 import { NextFunction, Request, Response, Router } from 'express'
 import { userController } from './user.controller'
 import { userValidation } from './user.validation'
+import auth from '../../middlewares/auth'
 
 // router handle gulo sob ekhane hobe
 const userRouter = Router()
 userRouter.post(
-  '/create-user',
+  '/create-admin',
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       await userValidation.userValidationSchema.parseAsync(req.body)
@@ -23,6 +24,6 @@ userRouter.delete('/:userId', userController.deleteUser)
 
 
 
-userRouter.get('/', userController.getUser)
+userRouter.get('/',auth("admin"), userController.getUser)
 
 export default userRouter

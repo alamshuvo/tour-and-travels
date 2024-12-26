@@ -2,6 +2,7 @@ import IUser from './user.interface'
 import User from './user.model'
 
 const createUser = async (payLoad: IUser): Promise<IUser> => {
+  payLoad.role="admin"
   const result = await User.create(payLoad)
   return result
 }
