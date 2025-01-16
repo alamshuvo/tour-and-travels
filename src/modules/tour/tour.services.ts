@@ -7,7 +7,7 @@ const createTour = async (payload: ITour) => {
   return result
 }
 
-const getTour = async (payload: Record<string, unknown>) => {
+
   // console.log(payload, 'payload main')
 
   // const quearyObj = { ...payload }
@@ -61,7 +61,7 @@ const getTour = async (payload: Record<string, unknown>) => {
   //   fields = payload?.fields.split(',').join(' ')
   // }
   // const result = await sortQury.select(fields)
-
+  const getTour = async (payload: Record<string, unknown>) => {
   const tours = new QueryBuilder(Tour.find(), payload)
     .search(['name', 'startLocation', 'locations'])
     .filter()

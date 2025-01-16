@@ -15,6 +15,7 @@ import { handleZodError } from '../helpers/handleZodError'
 type TErrorResponse = {
   success: boolean
   message: string
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   error: any
   name?: string
   code?: number

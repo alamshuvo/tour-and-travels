@@ -15,5 +15,8 @@ authRouter.post(
   validateRequest(AuthValidation.loginValidationSchema),
   AuthController.login
 )
+authRouter.post("/forget-password",validateRequest(AuthValidation.forgetPasswordValidationSchema),AuthController.forgetPassword);
+
+authRouter.post("/reset-password",validateRequest(AuthValidation.resetPasswordValidationSchema),AuthController.resetPassword)
 
 export default authRouter

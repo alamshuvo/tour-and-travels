@@ -82,5 +82,5 @@ userSchema.post('save', async function (doc, next) {
   next()
 })
 
-const User = model<IUser>('User', userSchema)
+const User = model<IUser>('Usertour', userSchema)
 export default User
