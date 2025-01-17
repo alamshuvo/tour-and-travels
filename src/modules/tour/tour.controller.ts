@@ -4,6 +4,7 @@ import { StatusCodes } from 'http-status-codes'
 import catchAsync from '../../utils/catchAsync'
 
 const createTour = catchAsync(async (req, res) => {
+  console.log(req.file);
   const body = JSON.parse(req.body.data)
   console.log(body);
   
