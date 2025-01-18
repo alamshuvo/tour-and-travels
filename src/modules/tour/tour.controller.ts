@@ -2,11 +2,21 @@ import { tourServices } from './tour.services'
 import sendResponse from '../../utils/sendResponse'
 import { StatusCodes } from 'http-status-codes'
 import catchAsync from '../../utils/catchAsync'
+import { sendImageCloudinary } from '../../utils/fileUploadHelpers'
 
 const createTour = catchAsync(async (req, res) => {
-  console.log(req.file);
   const body = JSON.parse(req.body.data)
-  console.log(body);
+  console.log(req.file);
+  
+  if (req.file) {
+    const imageName = "random";
+    const path = req.file.path;
+   const {secure_url} = await  sendImageCloudinary(imageName,path)
+   body.coverImage = secure_url
+   console.log(body);
+  }
+ 
+ 
   
   const result = await tourServices.createTour(body)
   sendResponse(res, {
